@@ -5,7 +5,7 @@ def readme():
 		return f.read()
 
 setup(name='k_index_calculator',
-      version='0.1.6',
+      version='0.1.7',
       description='Python module which calculates the K-Index of a geomagnetic time series.',
       long_description='Calculates the K-Index of geomagnetic time series using the FMI method',
       keywords='geomagnetic k-index space weather',
