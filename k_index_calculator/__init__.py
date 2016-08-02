@@ -94,7 +94,6 @@
 
 import datetime
 import numpy as np
-from time import strptime
 from scipy.interpolate import InterpolatedUnivariateSpline
 
 from matplotlib import pyplot as plt
@@ -432,7 +431,6 @@ def Subtracted(minute_time, smooth_time, minute_bx, smooth_Srx, minute_by, smoot
 
 		Returns
 		-----------
-		smooth_time = array of smooth time floats
 		subtracted_bx, subtracted_by = arrays of subtracted magnetic floats
 
 		-----------------------------------------------------------------
