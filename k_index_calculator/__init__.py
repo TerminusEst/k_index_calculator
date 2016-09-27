@@ -577,6 +577,11 @@ def KIndexPlotter(k_index, k_time, n):
 
 	start_day = k_time[0] - k_time[0]%(24*60*60)
 
+	start = Float2Time(start_day) + datetime.timedelta(1)
+	middle1 = start + datetime.timedelta(1)
+	middle2 = start + datetime.timedelta(2)
+	end = start + datetime.timedelta(3)
+
 	plt.clf()
 
 	barlist = plt.bar(Float2Time(k_time), k_index, width = 0.124, edgecolor = "black")
@@ -592,8 +597,11 @@ def KIndexPlotter(k_index, k_time, n):
 
 	plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%H:00'))
 	plt.gca().xaxis.set_major_locator(mdates.HourLocator(byhour=range(0,24,6)))
+	
+	plt.xlabel('{}-{}-{}                         {}-{}-{}                         {}-{}-{}'.format(start.day, start.strftime("%B")[0:3], start.year, middle1.day, middle1.strftime("%B")[0:3], middle1.year, middle2.day, middle2.strftime("%B")[0:3], middle2.year), fontsize = 14)
 
 	plt.show()
+
 
 	return fig
 
@@ -705,7 +713,7 @@ def OtherPlotter(minute_time, minute_bx, minute_by, n, titlez = "", stamp = ""):
 
 	start = Float2Time(start_day) + datetime.timedelta(1)
 	middle1 = start + datetime.timedelta(1)
-	middle2 = start + datetime.timedelta(1)
+	middle2 = start + datetime.timedelta(2)
 	end = start + datetime.timedelta(3)
 
 	#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
@@ -818,7 +826,7 @@ def BxByBzPlotter(minute_time, minute_bx, minute_by, minute_bz, n, titlez = "", 
 
 	start = Float2Time(start_day) + datetime.timedelta(1)
 	middle1 = start + datetime.timedelta(1)
-	middle2 = start + datetime.timedelta(1)
+	middle2 = start + datetime.timedelta(2)
 	end = start + datetime.timedelta(3)
 
 	# Start with the figure
