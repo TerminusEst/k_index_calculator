@@ -598,7 +598,7 @@ def KIndexPlotter(k_index, k_time, n):
 	plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%H:00'))
 	plt.gca().xaxis.set_major_locator(mdates.HourLocator(byhour=range(0,24,6)))
 	
-	plt.xlabel('{}-{}-{}                         {}-{}-{}                         {}-{}-{}'.format(start.day, start.strftime("%B")[0:3], start.year, middle1.day, middle1.strftime("%B")[0:3], middle1.year, middle2.day, middle2.strftime("%B")[0:3], middle2.year), fontsize = 14)
+	plt.xlabel('{}-{}-{}                         {}-{}-{}                         {}-{}-{}'.format(middle1.day, middle1.month, middle1.year, middle2.day, middle2.month, middle2.year, end.day, end.month, end.year), fontsize = 14)
 
 	plt.show()
 
