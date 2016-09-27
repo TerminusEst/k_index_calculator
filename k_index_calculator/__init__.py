@@ -105,7 +105,7 @@
 	Uses the MIT license.
 
 """
-
+import math
 import datetime
 import numpy as np
 from scipy.interpolate import InterpolatedUnivariateSpline
@@ -597,7 +597,7 @@ def KIndexPlotter(k_index, k_time, n):
 
 	return fig
 
-
+#-------------------------------------------------------------------------------
 
 def H(minute_bx, minute_by):
 	"""Returns the horizontal magnetic component
@@ -612,7 +612,7 @@ def H(minute_bx, minute_by):
 		
 		-----------------------------------------------------------------
 	"""
-	return np.sqrt(array(minute_bx)**2 + array(minute_by)**2)
+	return np.sqrt(np.array(minute_bx)**2 + np.array(minute_by)**2)
 
 #-------------------------------------------------------------------------------
 
@@ -631,12 +631,12 @@ def Slope(minute_time, *args):
 		-----------------------------------------------------------------
 	"""
 	output = []
-	new_time = arange(minute_time[0], minute_time[-1], 60)
+	new_time = np.arange(minute_time[0], minute_time[-1], 60)
 
 	for value_array in args:
-		a = numpy.interp(new_time, minute_time, value_array)
+		a = np.interp(new_time, minute_time, value_array)
 		sloped = np.gradient(a)
-		sloped = np.concatenate((sloped, array([sloped[-1]])))
+		sloped = np.concatenate((sloped, np.array([sloped[-1]])))
 
 		output.append(sloped)
 
@@ -730,7 +730,7 @@ def OtherPlotter(minute_time, minute_bx, minute_by, n, titlez = "", stamp = ""):
 	for i in range(4):
 		plt.axvline(Float2Time(start_day + (i*24*60*60)), lw = 2, color = "black")
 
-	xlim([start, end])
+	plt.xlim([start, end])
 
 	#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 	# Second subplot: Horizontal component
@@ -755,7 +755,7 @@ def OtherPlotter(minute_time, minute_bx, minute_by, n, titlez = "", stamp = ""):
 	for i in range(4):
 		plt.axvline(Float2Time(start_day + (i*24*60*60)), lw = 2, color = "black")
 
-	xlim([start, end])
+	plt.xlim([start, end])
 
 	plt.grid(True)
 
