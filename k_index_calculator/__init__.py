@@ -1,33 +1,118 @@
-from draco import draco as dr
-import os
+"""K-Index Calculator
+   ==================
 
-import KTEST as kic
+    A module for calculation of the K-Index from horizontal geomagnetic components.
+
+	This module uses the FMI method, details of which can be found here:
+	http://swans.meteo.be/sites/default/files/documentation/TN-RMI-2010-01_K-LOGIC.pdf
+
+	Functions Included
+	-----------------------------------------------------------------
+
+	Main Functions
+	-------------------
+
+		KIndexSuperCalc
+		- Calculates the K-index using the FMI method.
+
+		KIndexPlotter
+		- Plots K-Index values in a nice Bar Plot
+
+		BxByBzPlotter
+		- Plots Bx, By and Bz nicely
+
+		OtherPlotter
+		- Plots Declination, Horizontal and derivative of Horizontal nicely
+
+	Secondary Functions
+	-------------------
+
+		Time2Float
+		- Converts datetime object or array of datetime objects to floats.
+
+		Float2Time
+		- Converts float or array of floats to datetime objects.
+
+		MinuteBin
+		- Bin second data into minutes.
+
+		KIndex
+		- Calculate K-Index according to the FMI Method.
+
+		FMISmooth
+		- Calculates the Solar Regular (Sr) curve according to the FMI Method.
+
+		SrSmooth
+		- Smooths the solar regular curves.
+
+		Subtracted
+		- Subtracts the smoothed solar regular curves from the minute binned data.
+
+		KIndexBarColor
+		-Colours K-index bar plot so it looks nice.
+
+		H
+		- Gets horizontal component from bx and by
+
+		Declination
+		- gets declination in radians and degrees
+
+		Slope
+		- gets derivative of magnetic components
+
+
+	Usage
+	-------------------
+	Assuming you have 4 days of geomagnetic data in the following format:
+	
+	Times (array of datetime objects in seconds)
+	Bx, By, Bz (array of geomagnetic data in seconds)
+
+	First, convert the Times array into second floats:
+
+	>>> Times_float = Time2Float(Times)
+
+	Now convert all of the data to minute bins:
+
+	>>> minute_time, minute_bx, minute_by, minute_bz = MinuteBin(Times_float, Bx, By, Bz)
+
+	To get the K-Index for these 4 days:
+
+	>>> k_index, k_time, order = KIndexSuperCalc(minute_time, minute_bx, minute_by, n)
+
+	where n is the maximum threshold for a K9 event (dependent on latitude).
+
+	NOTE: The first few values in the array k_index are likely to be inaccurate.
+	This is because of the way the K-Index is calculated. It is safest to dismiss the first 8
+	calculated K-Index values.
+
+	To plot the K-Index:
+
+	>>> KIndexPlotter(k_index, k_time, m)
+
+	where m is the figure number.
+
+
+	Author
+	-------------------
+
+	Written by Sean Blake in Trinity College Dublin, 2014-2016.
+
+	Email: blakese@tcd.ie
+
+	GITHUB: https://github.com/TerminusEst
+
+	Uses the MIT license.
 
 """
-folder2 = "/home/blake/Drive/Magnetometers/Birr_Mag_Data/"
-files = sorted(os.listdir(folder2))[-4:]
 
-datez, timez, bx1, by1, bz1 = [], [], [], [], []
+import datetime
+import numpy as np
+from scipy.interpolate import InterpolatedUnivariateSpline
 
-for i in files:
-	if ".txt" in i:
-		print i
-		datezz, timezz = np.loadtxt(folder2 + i, usecols = (0, 1), unpack = True, skiprows = 1, dtype = str)
-		bxx, byy, bzz = np.loadtxt(folder2 + i, usecols = (3, 4, 5), unpack = True, skiprows = 1)
-
-		datez = np.concatenate((datez, datezz))
-		timez = np.concatenate((timez, timezz))
-		bx1 = np.concatenate((bx1, bxx))
-		by1 = np.concatenate((by1, byy))
-		bz1 = np.concatenate((bz1, bzz))
-
-
-timedate1 = dr.timedatez(datez, timez)
-timedate1_float = array(dr.time2float(timedate1))
-
-minute_time, minute_bx, minute_by, minute_bz = dr.minute_bin(timedate1_float, bx1, by1, bz1)
-timedate = dr.float2time(minute_time)
-"""
+from matplotlib import pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.ticker import AutoMinorLocator
 ##########################################################################
 ##########################################################################
 ##########################################################################
@@ -46,7 +131,6 @@ def H(minute_bx, minute_by):
 		-----------------------------------------------------------------
 	"""
 	return np.sqrt(array(minute_bx)**2 + array(minute_by)**2)
-
 
 def Slope(minute_time, *args):
 	"""Returns dBx/dt, dBy/dt of geomagnetic components (in nT/min)
@@ -94,15 +178,7 @@ def Declination(minute_bx, minute_by):
 
 	return D_rad, D_deg
 
-D_rad, D_deg = Declination(minute_bx, minute_by)
-minute_bh = H(minute_bx, minute_by)
-dbh = Slope(minute_time, minute_bh)[0]
-
-
-from matplotlib.ticker import AutoMinorLocator
-import matplotlib.dates as mdates
-
-def OtherPlots(minute_time, minute_bx, minute_by, n, titlez = "", stamp = ""):
+def OtherPlotter(minute_time, minute_bx, minute_by, n, titlez = "", stamp = ""):
 	"""Plots Declination, Horizontal and Derivative of Horizontal in a nice plot
 
 		NOTE: Plots 3 days of data.
@@ -224,12 +300,7 @@ def OtherPlots(minute_time, minute_bx, minute_by, n, titlez = "", stamp = ""):
 
 	return fig
 
-
-
-#fig1.set_size_inches(9, 8.5)
-#fig1.savefig("yewotmate.png")
-
-def BxByBzPlots(minute_time, minute_bx, minute_by, minute_bz, n, titlez = "", stamp = ""):
+def BxByBzPlotter(minute_time, minute_bx, minute_by, minute_bz, n, titlez = "", stamp = ""):
 	"""Plots Bx, By and Bz in a nice plot
 
 		NOTE: Plots 3 days of data.
