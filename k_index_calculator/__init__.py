@@ -577,7 +577,7 @@ def KIndexPlotter(k_index, k_time, n):
 
 	start_day = k_time[0] - k_time[0]%(24*60*60)
 
-	start = Float2Time(start_day) + datetime.timedelta(1)
+	start = Float2Time(start_day)
 	middle1 = start + datetime.timedelta(1)
 	middle2 = start + datetime.timedelta(2)
 	end = start + datetime.timedelta(3)
@@ -598,7 +598,7 @@ def KIndexPlotter(k_index, k_time, n):
 	plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%H:00'))
 	plt.gca().xaxis.set_major_locator(mdates.HourLocator(byhour=range(0,24,6)))
 	
-	plt.xlabel('{}-{}-{}                         {}-{}-{}                         {}-{}-{}'.format(middle1.day, middle1.month, middle1.year, middle2.day, middle2.month, middle2.year, end.day, end.month, end.year), fontsize = 14)
+	plt.xlabel('{}-{}-{}                         {}-{}-{}                         {}-{}-{}'.format(start.day, start.month, start.year, middle1.day, middle1.month, middle1.year, middle2.day, middle2.month, middle2.year), fontsize = 14)
 
 	plt.show()
 
