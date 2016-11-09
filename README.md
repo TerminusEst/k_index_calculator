@@ -22,15 +22,20 @@ Bx, By, Bz = arrays of geomagnetic data in second bins.
 
 First, convert the Times array into second floats:
 
-`>>> Times_float = Time2Float(Times)`
-
+```python
+>>> Times_float = Time2Float(Times)
+```
 Now convert all of the data to minute bins:
 
-`>>> minute_time, minute_bx, minute_by, minute_bz = MinuteBin(Times_float, Bx, By, Bz)`
+```python
+>>> minute_time, minute_bx, minute_by, minute_bz = MinuteBin(Times_float, Bx, By, Bz)
+```
 
 To get the K-Index for these 4 days:
 
-`>>> k_index, k_time, order = KIndexSuperCalc(minute_time, minute_bx, minute_by, n)`
+```python
+>>> k_index, k_time, order = KIndexSuperCalc(minute_time, minute_bx, minute_by, n)
+```
 
 where n is the maximum threshold for a K9 event (dependent on latitude).
 
@@ -40,7 +45,9 @@ calculated K-Index values.
 
 To plot the K-Index:
 
-`>>> KIndexPlotter(k_index[8:], k_time[8:], m)`
+```python
+>>> KIndexPlotter(k_index[8:], k_time[8:], m)
+```
 
 where m is the figure number.
 
@@ -49,7 +56,9 @@ where m is the figure number.
 ##**Installation**
 To install, type
 
-`pip install k_index_calculator`
+```python
+pip install k_index_calculator
+```
 
 
 ##**Author**
