@@ -6,12 +6,10 @@ A module for calculation of the geomagnetic K-Index from horizontal geomagnetic 
 This module uses the Finnish Meteorological Institute (FMI) method, details of which can be found [here](http://swans.meteo.be/sites/default/files/documentation/TN-RMI-2010-01_K-LOGIC.pdf):
 
 In a nutshell, this module takes horizontal geomagnetic components like this:
-![alt text][Horiz]
-[Horiz]: https://cloud.githubusercontent.com/assets/20742138/17296858/1a7f54c2-57fb-11e6-956b-c98714c9a6aa.png "Geomagnetic Field on St. Patrick's Day 2015"
+![Horiz](https://cloud.githubusercontent.com/assets/20742138/17296858/1a7f54c2-57fb-11e6-956b-c98714c9a6aa.png) "Geomagnetic Field on St. Patrick's Day 2015"
 
 ... and calculates the [K-Index](https://en.wikipedia.org/wiki/K-index):
-![alt text][KFin]
-[KFin]: https://cloud.githubusercontent.com/assets/20742138/17296866/20c566e6-57fb-11e6-9d18-c33fa18b53c2.png "K-Index on St. Patrick's Day 2015"
+![KFin](https://cloud.githubusercontent.com/assets/20742138/17296866/20c566e6-57fb-11e6-9d18-c33fa18b53c2.png) "K-Index on St. Patrick's Day 2015"
 
 ## **Quick Code Example**
 Assuming you have 4 days of geomagnetic data in the following format:
@@ -102,8 +100,7 @@ An estimation for the solar quiet or solar regular curve is calculated. This is 
 
 **Step 3**
 This solar quiet estimation is smoothed (**SrSmooth**), and subtracted from both horizontal components (**Subtracted**).
-![alt text][SrCurve]
-[SrCurve]: https://cloud.githubusercontent.com/assets/20742138/17298215/efce2c3e-5800-11e6-85ce-29aba5c144af.png "Bx Component and Sr Curve"
+![SrCurve](https://cloud.githubusercontent.com/assets/20742138/17298215/efce2c3e-5800-11e6-85ce-29aba5c144af.png) "Bx Component and Sr Curve"
 
 **Step 3**
 Steps 1-2 are repeated twice more with the reduced data to get a second and then final K-Index.
