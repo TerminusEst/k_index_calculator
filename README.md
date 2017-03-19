@@ -51,7 +51,7 @@ where m is the figure number.
 
 
 
-##**Installation**
+## **Installation**
 To install, type
 
 ```python
@@ -59,7 +59,7 @@ pip install k_index_calculator
 ```
 
 
-##**Author**
+## **Author**
 Written by Sean Blake in Trinity College Dublin, 2014-2016
 
 Email: blakese@tcd.ie
@@ -69,7 +69,7 @@ GITHUB: https://github.com/TerminusEst
 Uses the MIT license.
 
 
-##**FMI Method**
+## **FMI Method**
 Assuming you have 4 days of geomagnetic data in the following format:
 
 minute_time = array of datetime objects in minute bins.
@@ -102,14 +102,14 @@ An estimation for the solar quiet or solar regular curve is calculated. This is 
 This solar quiet estimation is smoothed (**SrSmooth**), and subtracted from both horizontal components (**Subtracted**).
 ![SrCurve](https://cloud.githubusercontent.com/assets/20742138/17298215/efce2c3e-5800-11e6-85ce-29aba5c144af.png) "Bx Component and Sr Curve"
 
-**Step 3**
+**Step 4**
 Steps 1-2 are repeated twice more with the reduced data to get a second and then final K-Index.
 
 All of these steps can be combined in one call of **KIndexSuperCalc**.
 ##Functions List
 
 
-####Main Functions
+#### Main Functions
 KIndexSuperCalc
 - Calculates the K-index using the FMI method.
 
@@ -117,7 +117,7 @@ KIndexPlotter
 - Plots K-Index values in a nice Bar Plot
 
 
-####Secondary Functions
+#### Secondary Functions
 
 Time2Float
 - Converts datetime object or array of datetime objects to floats.
