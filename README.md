@@ -6,10 +6,10 @@ A module for calculation of the geomagnetic K-Index from horizontal geomagnetic 
 This module uses the Finnish Meteorological Institute (FMI) method, details of which can be found [here](http://swans.meteo.be/sites/default/files/documentation/TN-RMI-2010-01_K-LOGIC.pdf):
 
 In a nutshell, this module takes horizontal geomagnetic components like this:
-![Horiz](https://cloud.githubusercontent.com/assets/20742138/17296858/1a7f54c2-57fb-11e6-956b-c98714c9a6aa.png) "Geomagnetic Field on St. Patrick's Day 2015"
+![Horiz](https://cloud.githubusercontent.com/assets/20742138/17296858/1a7f54c2-57fb-11e6-956b-c98714c9a6aa.png)
 
 ... and calculates the [K-Index](https://en.wikipedia.org/wiki/K-index):
-![KFin](https://cloud.githubusercontent.com/assets/20742138/17296866/20c566e6-57fb-11e6-9d18-c33fa18b53c2.png) "K-Index on St. Patrick's Day 2015"
+![KFin](https://cloud.githubusercontent.com/assets/20742138/17296866/20c566e6-57fb-11e6-9d18-c33fa18b53c2.png)
 
 ## **Quick Code Example**
 Assuming you have 4 days of geomagnetic data in the following format:
